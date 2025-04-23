@@ -1,0 +1,13 @@
+﻿@model CatalogoDeLibros.Models.Libro
+
+<h2>Detalles del Libro</h2>
+
+<div>
+	<h3>@Model.titulo</h3>
+	<div>
+		<p><strong>Autor:</strong> @Model.autor</p>
+		<p><strong>Año de Publicación:</strong> @Model.anioPublicacion</p>
+		<a asp-controller="Libro" asp-action="Index" class="btn btn-secondary">Volver al catalogo</a>
+	</div>
+</div>
+<a href="/Libro/Index">Volver al catalogo</a>

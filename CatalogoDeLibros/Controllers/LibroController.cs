@@ -21,5 +21,17 @@ namespace CatalogoDeLibros.Controllers
             var libros = ObtenerLibros();
             return View(libros);
         }
+
+        public IActionResult Detalle(int id)
+        {
+            var libros = ObtenerLibros();
+            var libro = libros.FirstOrDefault(l => l.id == id);
+            if (libro == null)
+            {
+                ViewBag.ErrorMessage = "El libro no fue encontrado.";
+                return View("Error");
+            }
+            return View(libro);
+        }
     }
 }
