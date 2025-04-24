@@ -11,6 +11,7 @@ else
     <table class="table table-striped">
         <thead>
             <tr>
+				<th>Portada</th>
                 <th>Título</th>
                 <th>Año</th>
             </tr>
@@ -19,6 +20,9 @@ else
             @foreach (var libro in Model)
             {
                 <tr>
+					<td>
+						<img src="@libro.UrlImagen" alt="Portada de @libro.titulo" width="80" />
+					</td>
                     <td>@libro.titulo</td>
                     <td>@libro.anioPublicacion</td>
                 </tr>
