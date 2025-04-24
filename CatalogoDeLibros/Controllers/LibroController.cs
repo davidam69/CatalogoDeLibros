@@ -28,7 +28,7 @@ namespace CatalogoDeLibros.Controllers
             var libro = libros.FirstOrDefault(l => l.id == id);
             if (libro == null)
             {
-                ViewBag.ErrorMessage = "El libro no fue encontrado.";
+                ViewBag.Error = "El libro no fue encontrado.";
                 return View("Error");
             }
             return View(libro);
