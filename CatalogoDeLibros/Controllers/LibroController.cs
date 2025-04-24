@@ -33,5 +33,20 @@ namespace CatalogoDeLibros.Controllers
             }
             return View(libro);
         }
+
+        public IActionResult Autor(int id)
+        {
+            var libros = ObtenerLibros();
+            var librosAutor = libros.Where(l => l.autor.id == id).ToList();
+
+            if (librosAutor.Count == 0)
+            {
+                ViewBag.Mensaje = "Este autor no tiene libros registrados.";
+                return View("Autor", new List<Libro>());
+            }
+
+            return View("Autor", librosAutor);
+        }
+
     }
 }
