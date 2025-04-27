@@ -1,6 +1,9 @@
 ﻿@model List<CatalogoDeLibros.Models.Libro>
+@section Styles {
+	<link rel="stylesheet" href="~/css/estilos.css" />
+}
 
-<h2>Catálogo de Libros</h2>
+<h2 class="titulo-catalogo">Catálogo de Libros</h2>
 
 <table class="table table-striped">
 	<thead>
@@ -22,7 +25,7 @@
 					<a asp-controller="Libro" asp-action="Detalle" asp-route-id="@libro.id">@libro.titulo</a>
 				</td>
 				<td>@libro.anioPublicacion</td>
-				<td><a asp-controller="Libro" asp-action="Autor" asp-route-id="@libro.autor.id">@libro.autor.nombre</a></td>
+				<td><a asp-controller="Libro" asp-action="Autor" asp-route-id="@libro?.autor?.id">@libro?.autor?.nombre</a></td>
 			</tr>
 		}
 	</tbody>
