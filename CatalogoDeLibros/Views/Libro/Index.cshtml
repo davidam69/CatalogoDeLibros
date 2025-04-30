@@ -1,29 +1,49 @@
 ﻿@model List<CatalogoDeLibros.Models.Libro>
 
-<h2>Catálogo de Libros</h2>
+@{
+	ViewData["Title"] = "Catálogo de Libros";
+	var colorFondo = ViewBag.ColorFondo as string ?? "white";
+}
 
-<table class="table table-striped">
-	<thead>
-		<tr>
-			<th>Portada</th>
-			<th>Título</th>
-			<th>Año</th>
-			<th>Autor</th>
-		</tr>
-	</thead>
-	<tbody>
-		@foreach (var libro in Model)
-		{
+@section Styles {
+	<link rel="stylesheet" href="~/css/estilos.css" /> 
+}
+
+<h2 class="titulo-catalogo">Catálogo de Libros</h2>
+
+<div style="background-color:@colorFondo; padding: 20px; border-radius: 10px;">
+	<table class="table">
+		<thead>
 			<tr>
-				<td>
-					<img src="@libro.UrlImagen" alt="Portada de @libro.titulo" width="80" />
-				</td>
-				<td>
-					<a asp-controller="Libro" asp-action="Detalle" asp-route-id="@libro.id">@libro.titulo</a>
-				</td>
-				<td>@libro.anioPublicacion</td>
-				<td><a asp-controller="Libro" asp-action="Autor" asp-route-id="@libro.autor.id">@libro.autor.nombre</a></td>
+				<th>Portada</th>
+				<th>Título</th>
+				<th>Año</th>
+				<th>Autor</th>
+				<th>Acciones</th>
 			</tr>
-		}
-	</tbody>
-</table>
+		</thead>
+		<tbody>
+			@foreach (var libro in Model)
+			{
+				<tr>
+					<td>
+						<img src="@libro.UrlImagen" alt="Portada de @libro.titulo" width="80" />
+					</td>
+					<td>
+						<a asp-controller="Libro" asp-action="Detalle" asp-route-id="@libro.id">@libro.titulo</a>
+					</td>
+					<td>@libro.anioPublicacion</td>
+					<td><a asp-controller="Libro" asp-action="Autor" asp-route-id="@libro?.autor?.id">@libro?.autor?.nombre</a></td>
+					<td><a href="@Url.Action("Detalle", "Libro", new { id = libro?.id })" class="btn btn-info">Ver detalles</a></td>
+				</tr>
+			}
+		</tbody>
+	</table>
+	<div class="mt-4">
+		<h4>Cambiar color de fondo:</h4>
+		<a class="btn btn-primary" asp-controller="Libro" asp-action="CambiarFondo" asp-route-color="lightblue">Celeste</a>
+		<a class="btn btn-success" asp-controller="Libro" asp-action="CambiarFondo" asp-route-color="lightgreen">Verde</a>
+		<a class="btn btn-warning" asp-controller="Libro" asp-action="CambiarFondo" asp-route-color="lightyellow">Amarillo</a>
+		<a class="btn btn-secondary" asp-controller="Libro" asp-action="CambiarFondo" asp-route-color="white">Blanco</a>
+	</div>
+</div>

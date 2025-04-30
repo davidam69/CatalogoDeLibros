@@ -1,6 +1,6 @@
 ﻿@model List<CatalogoDeLibros.Models.Libro>
 
-<h2>Libros del Autor: @Model.FirstOrDefault()?.autor.nombre</h2>
+<h2>Libros del Autor: @Model.FirstOrDefault()?.autor?.nombre</h2>
 
 @if (!Model.Any())
 {
@@ -14,20 +14,21 @@ else
 				<th>Portada</th>
                 <th>Título</th>
                 <th>Año</th>
+                <th>Acciones</th>
             </tr>
         </thead>
         <tbody>
             @foreach (var libro in Model)
             {
                 <tr>
-					<td>
-						<img src="@libro.UrlImagen" alt="Portada de @libro.titulo" width="80" />
-					</td>
-                    <td>@libro.titulo</td>
+					<td><img src="@libro.UrlImagen" alt="Portada de @libro.titulo" width="80" /></td>
+                    <td><a asp-controller="Libro" asp-action="Detalle" asp-route-id="@libro.id">@libro.titulo</a></td>
                     <td>@libro.anioPublicacion</td>
+                    <td><a href="@Url.Action("Detalle", "Libro", new { id = libro.id })" class="btn btn-info">Ver detalles</a></td>
                 </tr>
             }
         </tbody>
+
     </table>
 }
 <a asp-controller="Libro" asp-action="Index" class="btn btn-secondary">Volver al catalogo</a>
