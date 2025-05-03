@@ -9,7 +9,10 @@
     <link rel="stylesheet" href="~/CatalogoDeLibros.styles.css" asp-append-version="true" />
     @await RenderSectionAsync("Styles", required: false)
 </head>
-<body>
+@{
+    var fondo = TempData["ColorFondo"] as string ?? "white";
+}
+<body style="background-color:@ViewBag.ColorFondo">
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
 

@@ -38,12 +38,16 @@ namespace CatalogoDeLibros.Controllers
 
         public IActionResult Index()
         {
+            ViewBag.ColorFondo = TempData["ColorFondo"] ?? "white";
+            TempData.Keep("ColorFondo"); // mantiene TempData para futuras páginas
             var libros = ObtenerLibros();
             return View(libros);
         }
 
         public IActionResult Detalle(int id)
         {
+            ViewBag.ColorFondo = TempData["ColorFondo"] ?? "white";
+            TempData.Keep("ColorFondo"); // mantiene TempData para futuras páginas
             var libros = ObtenerLibros();
             var libro = libros.FirstOrDefault(l => l.id == id);
             if (libro == null)
@@ -56,6 +60,8 @@ namespace CatalogoDeLibros.Controllers
 
         public IActionResult Autor(int id)
         {
+            ViewBag.ColorFondo = TempData["ColorFondo"] ?? "white";
+            TempData.Keep("ColorFondo"); // mantiene TempData para futuras páginas
             var libros = ObtenerLibros();
             var librosAutor = libros.Where(l => l?.autor?.id == id).ToList();
 
@@ -70,9 +76,8 @@ namespace CatalogoDeLibros.Controllers
 
         public IActionResult CambiarFondo(string color)
         {
-            ViewBag.ColorFondo = color;
-            var libros = ObtenerLibros();
-            return View("Index", libros);
+            TempData["ColorFondo"] = color;
+            return RedirectToAction("Index");
         }
 
 
