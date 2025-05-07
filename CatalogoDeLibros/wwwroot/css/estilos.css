@@ -11,3 +11,10 @@
     text-shadow: 2px 2px 5px rgba(0,0,0,0.3);
 }
 
+.crear-libro-bg {
+    background-image: url('/images/fondo_libros.jpeg'); /* ruta relativa */
+    background-size: cover;
+    background-position: center;
+    min-height: 100vh; /* para que tome toda la altura */
+    padding: 2rem;
+}
