@@ -1,0 +1,10 @@
+﻿global using System;
+global using System.Collections.Generic;
+global using System.Linq;
+global using System.IO;
+global using System.Text;
+global using Microsoft.AspNetCore.Mvc;
+global using Microsoft.AspNetCore.Http;
+global using System.ComponentModel.DataAnnotations;
+global using Microsoft.AspNetCore.Mvc.Rendering;
+global using CatalogoDeLibros.Models;

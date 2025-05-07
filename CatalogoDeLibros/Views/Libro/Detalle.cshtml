@@ -1,5 +1,10 @@
 ﻿@model CatalogoDeLibros.Models.Libro
 
+@if (ViewBag.Mensaje != null)
+{
+	<div class="alert alert-success">@ViewBag.Mensaje</div>
+}
+
 <h2>Detalles del Libro</h2>
 
 <div>
