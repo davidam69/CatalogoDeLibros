@@ -1,4 +1,6 @@
-﻿namespace CatalogoDeLibros.Controllers
+﻿using CatalogoDeLibros.Models;
+
+namespace CatalogoDeLibros.Controllers
 {
     public class LibroController : Controller
     {
@@ -131,6 +133,46 @@
                 new Autor { id = 2, nombre = "Ray Bradbury" }
             };
             return autores;
+        }
+
+        [HttpGet]
+        public IActionResult Editar(int id)
+        {
+            var libro = _libros.FirstOrDefault(l => l.id == id);
+            if (libro == null)
+            {
+                return NotFound();
+            }
+            ViewBag.Autores = ObtenerAutores();
+            return View(libro);
+        }
+
+        [HttpPost]
+        public IActionResult Editar(Libro libro)
+        {
+            if (!ModelState.IsValid)
+            {
+                ViewBag.Autores = ObtenerAutores();
+
+                return View(libro);
+            }
+            var libroExistente = _libros.FirstOrDefault(l => l.id == libro.id);
+            if (libroExistente == null)
+            {
+                return NotFound();
+            }
+            // Actualizar campos
+            libroExistente.titulo = libro.titulo;
+            libroExistente.anioPublicacion = libro.anioPublicacion;
+            libroExistente.UrlImagen = libro.UrlImagen;
+            libroExistente.autorId = libro.autorId;
+            var autorSeleccionado = ObtenerAutores().FirstOrDefault(a => a.id == libro.autorId);
+            if (autorSeleccionado != null)
+            {
+                libroExistente.autor = autorSeleccionado;
+            }
+            TempData["Mensaje"] = "Libro editado correctamente";
+            return RedirectToAction("Detalle", new { id = libro.id });
         }
     }
 }
