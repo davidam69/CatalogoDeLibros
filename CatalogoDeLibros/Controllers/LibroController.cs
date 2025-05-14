@@ -1,6 +1,4 @@
-﻿using CatalogoDeLibros.Models;
-
-namespace CatalogoDeLibros.Controllers
+﻿namespace CatalogoDeLibros.Controllers
 {
     public class LibroController : Controller
     {
@@ -56,16 +54,14 @@ namespace CatalogoDeLibros.Controllers
         {
             ViewBag.ColorFondo = TempData["ColorFondo"] ?? "white";
             TempData.Keep("ColorFondo"); // mantiene TempData para futuras páginas
-            var libros = ObtenerLibros();
-            var libro = libros.FirstOrDefault(l => l.id == id);
-            if (libro == null)
+            var libroSeleccionado = _libros.FirstOrDefault(l => l.id == id);
+            if (libroSeleccionado == null)
             {
-                ViewBag.Error = "El libro no fue encontrado.";
-                return View("Error");
+                return RedirectToAction("Index");
             }
 
             ViewBag.Mensaje = TempData["Mensaje"];
-            return View(libro);
+            return View(libroSeleccionado);
         }
 
         public IActionResult Autor(int id)
@@ -150,6 +146,7 @@ namespace CatalogoDeLibros.Controllers
         [HttpPost]
         public IActionResult Editar(Libro libro)
         {
+            ModelState.Remove("autor"); // Ignorar el id al validar
             if (!ModelState.IsValid)
             {
                 ViewBag.Autores = ObtenerAutores();
@@ -165,7 +162,6 @@ namespace CatalogoDeLibros.Controllers
             libroExistente.titulo = libro.titulo;
             libroExistente.anioPublicacion = libro.anioPublicacion;
             libroExistente.UrlImagen = libro.UrlImagen;
-            libroExistente.autorId = libro.autorId;
             var autorSeleccionado = ObtenerAutores().FirstOrDefault(a => a.id == libro.autorId);
             if (autorSeleccionado != null)
             {
