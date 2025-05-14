@@ -1,7 +1,3 @@
-using System.Diagnostics;
-using CatalogoDeLibros.Models;
-using Microsoft.AspNetCore.Mvc;
-
 namespace CatalogoDeLibros.Controllers
 {
     public class HomeController : Controller

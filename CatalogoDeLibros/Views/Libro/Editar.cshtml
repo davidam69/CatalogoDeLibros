@@ -9,7 +9,7 @@
 	Layout = "_Layout";
 }
 <div class ="crear-libro-bg">
-	<h2>Editar Libro</h2>
+	<h2 class="text-azul-sombra mb-4">Editar Libro</h2>
 
 	@if (ViewBag.mensaje != null)
 	{
@@ -19,27 +19,23 @@
 	<form asp-action="Editar" method="post">
 		<input type="hidden" asp-for="id" />
 		<!-- Campo título -->
-		<div class="mb-3">
+		<div class="text-azul-sombra mb-3">
 			<label asp-for="titulo"></label>
 			<input asp-for="titulo" class="form-control" />
 			<span asp-validation-for="titulo" class="text-danger"></span>
 		</div>
 		<!-- Campo año de publicación -->
-		<div class="mb-3">
+		<div class="text-azul-sombra mb-3">
 			<label asp-for="anioPublicacion"></label>
 			<input asp-for="anioPublicacion" class="form-control" />
 			<span asp-validation-for="anioPublicacion" class="text-danger"></span>
 		</div>
 		<!-- Campo autor -->
-		<div class="mb-3">
+		<div class="text-azul-sombra mb-3">
 			<label for="Autor">Autor</label>
 			<select asp-for="autorId" class="form-select">
 				@foreach (var autor in ViewBag.Autores as List<Autor>)
 				{
-					@foreach (var Autor in ViewBag.Autores as List<Autor> ?? new List<Autor>())
-					{
-						<option value="@autor.id">@autor.nombre</option>
-					}
 					<option value="@autor.id" selected="@(autor.id == Model.autorId)">
 						@autor.nombre
 					</option>
@@ -48,7 +44,7 @@
 			<span asp-validation-for="autorId" class="text-danger"></span>
 		</div>
 		<!-- Campo URL de imagen -->
-		<div class="mb-3">
+		<div class="text-azul-sombra mb-3">
 			<label asp-for="UrlImagen"></label>
 			<input asp-for="UrlImagen" class="form-control" />
 		</div>

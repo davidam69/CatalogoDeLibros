@@ -8,3 +8,4 @@ global using Microsoft.AspNetCore.Http;
 global using System.ComponentModel.DataAnnotations;
 global using Microsoft.AspNetCore.Mvc.Rendering;
 global using CatalogoDeLibros.Models;
+global using System.Diagnostics;
