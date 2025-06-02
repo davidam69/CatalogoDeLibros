@@ -134,7 +134,7 @@
         [HttpGet]
         public IActionResult Editar(int id)
         {
-            var libro = _libros.FirstOrDefault(l => l.id == id);
+            var libro = ObtenerLibros().FirstOrDefault(l => l.id == id);
             if (libro == null)
             {
                 return NotFound();
@@ -153,7 +153,7 @@
 
                 return View(libro);
             }
-            var libroExistente = _libros.FirstOrDefault(l => l.id == libro.id);
+            var libroExistente = ObtenerLibros().FirstOrDefault(l => l.id == libro.id);
             if (libroExistente == null)
             {
                 return NotFound();
