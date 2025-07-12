@@ -40,8 +40,6 @@
         {
             return _libros;
         }
-
-
         public IActionResult Index()
         {
             ViewBag.ColorFondo = TempData["ColorFondo"] ?? "white";
@@ -168,7 +166,7 @@
                 libroExistente.autor = autorSeleccionado;
             }
             TempData["Mensaje"] = "Libro editado correctamente";
-            return RedirectToAction("Detalle", new { id = libro.id });
+            return RedirectToAction("Detalle", new { id = libro });
         }
     }
 }
