@@ -6,6 +6,8 @@
     html {
         font-size: 16px;
     }
+    /* Cuando el ancho de la pantalla sea mayor o igual a 768 píxeles, entonces el tamaño
+    de fuente base (font-size) del elemento <html> será de 16 píxeles. */
 }
 
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
@@ -13,17 +15,24 @@
 }
 
 html {
-    position: relative;
+    position: relative; /* Indica que el elemento <html> tendrá posición relativa. Esto no lo 
+    mueve visualmente por sí solo, pero permite posicionar elementos hijos con position: 
+    absolute; de forma relativa al <html>. Es útil si necesitás que un hijo se ubique respecto
+    al borde del documento, no al body.*/
     min-height: 100%;
 }
 
 body {
-    margin-bottom: 60px;
+    margin-bottom: 60px; /* espacio para el footer */
 }
 
+/* significa que se deja un espacio vacío de 60 píxeles debajo del contenido del <body> (es 
+   decir, entre el borde inferior del contenido del sitio web y el borde inferior del 
+   navegador). los otros extremos seria top, left y right */
+
 .table img {
-    border-radius: 5px;
-    box-shadow: 2px 2px 5px gray;
+    border-radius: 5px; /* le da un radio a los bordes de 5 pixeles */
+    box-shadow: 2px 2px 5px gray; /* lo sombrea con gris */
 }
 
 
@@ -31,15 +40,17 @@ body {
     color: darkgreen;
     font-size: 36px;
     font-family: 'Segoe UI', sans-serif;
-    text-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+    text-shadow: 2px 2px 5px #e333ff;
 }
 
 .crear-libro-bg {
     background-image: url('/images/fondo_libros.jpeg'); /* ruta relativa */
-    background-size: cover;
-    background-position: center;
+    background-size: cover; /* Escala la imagen para cubrir todo el contenedor, aunque tenga 
+    que recortarla. Mantiene las proporciones (aspect ratio) de la imagen. */
+    background-position: center; /* posiciona la imagen al centro tanto costados y altura */
     min-height: 100vh; /* para que tome toda la altura */
-    padding: 2rem;
+    padding: 2rem; /* Agrega espacio interno (padding) de 2 unidades relativas (rem) alrededor 
+    del contenido dentro del div. 2rem suelen ser 32px si html { font-size: 16px; } */
 }
 
 .text-azul-sombra {
