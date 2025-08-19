@@ -23,6 +23,18 @@
 			</tr>
 		</thead>
 		<tbody>
+
+			@{
+				var mensaje = TempData["Mensaje"] as string;
+			}
+
+			@if (!string.IsNullOrEmpty(mensaje))
+			{
+				<div class="alert alert-success">
+					@mensaje
+				</div>
+			}
+
 			@foreach (var libro in Model)
 			{
 				<tr>

@@ -111,7 +111,7 @@
             }
 
             libro.autor = autorSeleccionado;
-            libro.id = ObtenerLibros().Any()? ObtenerLibros().Max(l => l.id) + 1 : 1; // Asignar un nuevo ID
+            libro.id = ObtenerLibros().Any() ? ObtenerLibros().Max(l => l.id) + 1 : 1; // Asignar un nuevo ID
             ObtenerLibros().Add(libro); // Simular almacenamiento
 
             TempData["Mensaje"] = $"libro '{libro.titulo}' creado con éxito.";
@@ -167,6 +167,30 @@
             }
             TempData["Mensaje"] = "Libro editado correctamente";
             return RedirectToAction("Detalle", new { id = libro });
+        }
+
+        [HttpGet]
+        public IActionResult Eliminar(int id)
+        {
+            var libro = ObtenerLibros().FirstOrDefault(l => l.id == id);
+            if (libro == null)
+            {
+                return NotFound();
+            }
+            return View(libro);
+        }
+
+        [HttpPost, ActionName("Eliminar")]
+        public IActionResult ConfirmarEliminar(int id)
+        {
+            var libro = ObtenerLibros().FirstOrDefault(l => l.id == id);
+            if (libro == null)
+            {
+                return NotFound();
+            }
+            ObtenerLibros().Remove(libro);
+            TempData["Mensaje"] = "Libro eliminado correctamente";
+            return RedirectToAction("Index");
         }
     }
 }
