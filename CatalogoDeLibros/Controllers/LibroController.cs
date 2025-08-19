@@ -172,25 +172,34 @@
         [HttpGet]
         public IActionResult Eliminar(int id)
         {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
             var libro = ObtenerLibros().FirstOrDefault(l => l.id == id);
             if (libro == null)
             {
                 return NotFound();
             }
+
             return View(libro);
         }
 
         [HttpPost, ActionName("Eliminar")]
-        public IActionResult ConfirmarEliminar(int id)
+        [ValidateAntiForgeryToken]
+        public IActionResult Eliminar(Libro libro)
         {
-            var libro = ObtenerLibros().FirstOrDefault(l => l.id == id);
-            if (libro == null)
+            var libroExistente = ObtenerLibros().FirstOrDefault(l => l.id == libro.id);
+            if (libroExistente != null)
             {
-                return NotFound();
+                ObtenerLibros().Remove(libroExistente);
             }
-            ObtenerLibros().Remove(libro);
-            TempData["Mensaje"] = "Libro eliminado correctamente";
-            return RedirectToAction("Index");
+
+            // Removed the incorrect SaveChanges() call as List<Libro> does not support it.
+            // No additional action is needed here since the list is already updated in memory.
+
+            return RedirectToAction(nameof(Index));
         }
     }
 }
